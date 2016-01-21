@@ -44,21 +44,20 @@ public class BinaryTreeSortTest {
         }
 
         Node current = head;
-        boolean isFinished =false;
-        while(!isFinished){
+        while(true){
             if(current.data < data){
                 if(current.right != null) {
                     current = current.right;
                 } else{
                     current.right = newNode;
-                    isFinished =true;
+                    return;
                 }
             }else{
                 if(current.left != null) {
                     current = current.left;
                 } else {
                     current.left = newNode;
-                    isFinished = true;
+                    return;
                 }
             }
         }
@@ -71,41 +70,25 @@ public class BinaryTreeSortTest {
      */
     public boolean delete(int data){
         if(head == null) return false;
-
-        Node previous = head;
+        Node parent = head;
         Node current = head;
-        boolean isFound = false;
         boolean isLeft = true;
-        while(true){
-            if(current.data == data){
-                isFound = true;
-                break;
-            }else if(current.data < data){
-                if(current.right != null){
-                    isLeft = false;
-                    previous = current;
-                    current = current.right;
-                }else{
-                    isFound = false;
-                    break;
-                }
+        while(current.data != data){
+            parent = current;
+            if(current.data < data){
+                current = current.right;
+                isLeft = false;
             }else{
-                if(current.left != null){
-                    isLeft = true;
-                    previous = current;
-                    current = current.left;
-                }else{
-                    isFound = false;
-                    break;
-                }
+                current = current.left;
+                isLeft = true;
             }
+
+            if(current == null) return false;
         }
-        if(isFound){
-           deleteCurrentNode(current,isLeft, previous);
-            return true;
-        }else{
-            return false;
-        }
+
+        deleteCurrentNode2(current,isLeft, parent);
+
+        return true;
     }
 
     /**
@@ -116,7 +99,7 @@ public class BinaryTreeSortTest {
      */
     private void deleteCurrentNode(Node current, boolean isLeftChild, Node previous){
         //特殊处理，如果将要删除的数据是根节点
-        if(current == previous || previous == null){
+        if(current == head){
             if(head.left != null && head.right != null){
                 previous = head;
                 Node deletingNode = head;//保存将要删除的节点
@@ -177,39 +160,76 @@ public class BinaryTreeSortTest {
         }
     }
 
-//    public Node getTargetNode(int data){
-//        if(head == null) return null;
-//
-//        if(head.data == data) return head;
-//
-//        Node current = head;
-//        boolean isFound = false;
-//
-//        while(true){
-//            if(current.data == data){
-//                isFound = true;
-//                break;
-//            }else if(current.data < data){
-//                if(current.right != null){
-//                    current = current.right;
-//                }else{
-//                    isFound = false;
-//                    break;
-//                }
-//            }else{
-//                if(current.left != null){
-//                    current = current.left;
-//                }else{
-//                    isFound = false;
-//                    break;
-//                }
-//            }
-//        }
-//        if(isFound)
-//            return current;
-//        else
-//            return null;
-//    }
+    /**
+     * 删除当前节点
+     * @param current 将要删除的节点
+     * @param previous 当前节点的前一个节点
+     * @param isLeftChild 当前节点是否为左孩子
+     */
+    private void deleteCurrentNode2(Node current, boolean isLeftChild, Node previous){
+        //如果左右孩子节点都不为空
+        if(current.left != null && current.right != null){
+            Node deletingNode = current;//保存将要删除的节点
+            previous = current;
+            current = current.right;
+            //寻找将要删除的节点的后继节点（中序遍历）
+            while(current.left != null){
+                previous = current;
+                current = current.left;
+            }
+            deletingNode.data = current.data;
+            if(previous == deletingNode)//如果后继节点是待删除节点的右子树。
+                previous.right = current.right;
+            else
+                previous.left = current.right;
+        }else if(current.left != null){
+            //current.left != null && current.right == null
+            if(current == head) {
+//                current = current.left;
+                head = head.left;
+            }
+            else if(isLeftChild)
+                previous.left = current.left;
+            else
+                previous.right = current.left;
+        }else if(current.right != null){
+            //current.left == null && current.right != null
+            if(current == head) {
+//                current = current.right;
+                head = head.right;
+            }
+            else if(isLeftChild) {
+                previous.left = current.right;
+            }
+            else
+                previous.right = current.right;
+        }else{
+            //current.left == null && current.right == null
+            if(current == head)
+                head = null;
+            else if(isLeftChild)
+                previous.left = null;
+            else
+                previous.right = null;
+
+        }
+    }
+
+    public Node getTargetNode(int data){
+
+        Node current = head;
+
+        while(current.data != data){
+            if(current.data < data){
+                current = current.right;
+            }else{
+                current = current.left;
+            }
+
+            if(current == null) return null;
+        }
+        return current;
+    }
 
     public class Node{
         Node left;
@@ -245,8 +265,7 @@ public class BinaryTreeSortTest {
         sortTest.print();
         System.out.println();
 
-        boolean flag = sortTest.delete(5);
-        System.out.println(flag);
+        boolean flag = sortTest.delete(8);
         sortTest.print();
     }
 }
