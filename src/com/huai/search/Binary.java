@@ -75,7 +75,7 @@ public class Binary {
             mid = (first&last)+((first^last)>>1);
             if(a[mid] == a[first]){
                 int temp = a[first];
-                for (int i = first; i <= mid; i++) {
+                for (int i = first; i <= last; i++) {
                     if(temp > a[i])
                         temp = a[i];
                 }
@@ -95,7 +95,7 @@ public class Binary {
         Binary test = new Binary();
 //        int result = test.doBinarySearch(new int[]{1,3,5,7,8,9,9,10,23}, 5, 0, 8);
 
-        int result = test.getMin(new int[]{0});
+        int result = test.getMin(new int[]{0,1,1,0});
         System.out.println(result);
     }
 }
