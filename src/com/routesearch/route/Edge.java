@@ -6,7 +6,12 @@ package com.routesearch.route;
 public class Edge {
 
     private int weight = 0;
+    private int startID = -1;
     private int distinationID = -1;
+
+    /**
+     * 边的标号，也就是边的索引。
+     */
     private int index = -1;
 
     public Edge(){}
@@ -15,6 +20,11 @@ public class Edge {
         this.weight = weight;
         this.distinationID = distinationID;
         this.index = index;
+    }
+
+    public Edge(int startID, int distinationID, int weight, int index){
+        this(distinationID, weight, index);
+        this.startID = startID;
     }
 
     public int getWeight() {
@@ -39,5 +49,13 @@ public class Edge {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public int getStartID() {
+        return startID;
+    }
+
+    public void setStartID(int startID) {
+        this.startID = startID;
     }
 }

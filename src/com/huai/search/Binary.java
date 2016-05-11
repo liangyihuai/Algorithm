@@ -81,21 +81,97 @@ public class Binary {
                 }
                 return temp;
             }else if(a[mid] > a[0]){
-                first = mid;
+                first = mid + 1;
             }else if(a[mid] < a[0]){
-                last = mid;
+                last = mid - 1;
             }
         }
         return a[last];
     }
 
+    /**
+     * 使用二分查找的方法，在一个顺序的数组中查找某个元素第一次出现的位置。
+     * @param arr
+     * @param target
+     * @return
+     */
+    public int findMin(int arr[], int target){
+        if(arr == null || arr.length == 0) return -1;
 
+        int start = 0;
+        int end = arr.length-1;
 
+        while(start <= end){
+            int mid = (start&end)+((start^end)>>1);
+
+            if(arr[mid] == target){
+                if(mid == 0)
+                    return 0;
+                if(arr[mid-1] < target){
+                    return mid;
+                }
+                end = mid;
+            }
+            else if(arr[mid] < target){
+                start = mid+1;
+            }else if(arr[mid] > target){
+                end = mid-1;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 使用二分查找的方法，在一个顺序的数组中查找某个元素最后出现的位置。
+     * @param arr
+     * @param target
+     * @return
+     */
+    public int findMax(int[]arr, int target){
+        if(arr == null || arr.length == 0)
+            return -1;
+
+        int start = 0;
+        int end = arr.length-1;
+        while(start <= end){
+            int mid = (start&end)+((start^end)>>1);
+
+            if(target < arr[mid]){
+                end = mid-1;
+            }else if(target > arr[mid]){
+                start = mid+1;
+            }else if(target == arr[mid]){
+                if(mid == arr.length-1){
+                    return mid;
+                }
+                if(arr[mid+1] > target){
+                    return mid;
+                }
+                start = mid;
+            }
+        }
+        return -1;
+    }
+
+    public void doTest_findMin(){
+        int[] arr = {1,2,3,4,5,5,5,6,7};
+
+        int[] arr2 = {4};
+        int i = findMin(arr2, 2);
+        System.out.println(i);
+    }
+
+    public void doTest_findMax(){
+        int[] arr = {1,2,3,4,5,5,5,6,7};
+        int [] arr2 = {2};
+        int i = findMax(arr2, 6);
+        System.out.println(i);
+    }
     public static void main(String[] args) {
         Binary test = new Binary();
-//        int result = test.doBinarySearch(new int[]{1,3,5,7,8,9,9,10,23}, 5, 0, 8);
 
-        int result = test.getMin(new int[]{0,1,1,0});
-        System.out.println(result);
+        test.doTest_findMin();
+        test.doTest_findMax();
+
     }
 }

@@ -37,31 +37,37 @@ public class CommonBinaryTree {
     }
 
     /**
-     * 获取二叉树的深度
-     * @param node
+     * 思路：递归。
+     * 1、得到根节点左孩子的高度。
+     * 2、得到根节点右孩子的高度。
+     * 3、比较左右孩子的高度，取最大的，同时增加当前节点的高度1。
+     * @param root
      * @return
      */
-    public int getDepth(Node node){
-        int leftDepth = 0;
-        int rightDepth = 0;
+    public int getTreeDepth(Node root){
+        if(root == null)return 0;
 
-        if(node.left != null){
-            leftDepth = getDepth(node.left);
-        }
-        if(node.right != null){
-            rightDepth = getDepth(node.right);
-        }
-        if(leftDepth > rightDepth){
-            return leftDepth + 1;
-        }else{
-            return rightDepth + 1;
-        }
+        int depth = 0;
+
+        int leftDepth = getTreeDepth(root.left);//左孩子的高度
+
+        int rightDepth = getTreeDepth(root.right);//右孩子的高度
+
+        depth = leftDepth>rightDepth?leftDepth:rightDepth;
+
+        return depth+1;//增加当前节点的高度。
+
     }
+
 
     public class Node{
         Node left;
         Node right;
         int data;
+
+        public Node(){
+
+        }
 
         public Node(int data){
             this.data = data;
@@ -86,6 +92,59 @@ public class CommonBinaryTree {
                 q.add(current.right);
             }
         }
+    }
+
+
+    /**
+     * 判断一棵二叉树是不是平衡的。
+     * 思路：在递归求解树的深度的时候比较当前节点的左右子树的深度是否大于1.
+     * @param root
+     * @return
+     */
+    public boolean isBalance(Node root){
+        if(root == null)
+            return false;
+
+        int[] isBalance = new int[1];
+        compareDepth(root, isBalance);
+        if(isBalance[0] == 1){
+            return false;
+        } else{
+            return true;
+        }
+    }
+
+    /**
+     * 该函数的功能是求解树的深度。
+     * 时间复杂度：每一个节点只遍历一次。
+     * @param node
+     * @param isBalance 只包含一个元素，元素的值中，0表示是平衡树，1表示不是。作用类似于c语言的指针的指针。
+     * @return
+     */
+    private int compareDepth(Node node, int[] isBalance){
+        if(node == null) return 0;
+
+        if(isBalance[0] == 1)return 0;
+
+        int depth = 0;
+        System.out.print(node.data+" ");
+        int leftDepth = compareDepth(node.left, isBalance);
+        int rightDepth = compareDepth(node.right, isBalance);
+
+        depth = leftDepth>rightDepth?leftDepth:rightDepth;
+
+        int temp = leftDepth-rightDepth;
+        if(temp >0){
+            if(temp > 1) {
+                isBalance[0] = 1;
+            }
+        }else if(temp < 0){
+            if(temp < -1){
+                isBalance[0] = 1;
+            }
+        }
+
+        return depth+1;
     }
 
 

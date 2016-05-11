@@ -1,5 +1,7 @@
 package com.huai.math;
 
+import com.routesearch.route.Graph;
+
 import java.util.Objects;
 
 /**
@@ -7,7 +9,7 @@ import java.util.Objects;
  */
 public class Test {
 
-    public static void main(String args[]){
+    public static void main(String args[]) throws InterruptedException {
 
     }
 }

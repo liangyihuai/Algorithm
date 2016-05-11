@@ -1,4 +1,4 @@
-package com.routesearch.route;
+package com.huai.huawei;
 
 /**
  * Created by liangyh on 4/2/16.
@@ -9,7 +9,6 @@ public class Vertex {
     private int id = -1;//表示该节点在图中的下标。也就是数组的下标。
     private int[] visiteds;
     private boolean inStack = false;
-    private boolean isVisited = false;
 
     public Vertex(int MAX){
         visiteds = new int[MAX];
@@ -74,13 +73,5 @@ public class Vertex {
         for (int i = 0; i < visiteds.length; i++) {
             visiteds[i] = -1;
         }
-    }
-
-    public boolean isVisited() {
-        return isVisited;
-    }
-
-    public void setVisited(boolean visited) {
-        isVisited = visited;
     }
 }

@@ -8,26 +8,19 @@ package com.huai.sort.quick;
  */
 public class QuickSortTest {
     public static void main(String[] args) {
-        int [] a = {4,3,2,1};
-        QuickSortTest quickSortTest = new QuickSortTest();
-        quickSortTest.doSort(a, 0, a.length-1);
-        quickSortTest.print(a);
+       QuickSortTest test = new QuickSortTest();
+        test.doTest2();
     }
 
-    public void print(int[] a){
-        for (int i = 0; i < a.length; i++) {
-            System.out.print(a[i]+" ");
-        }
-        System.out.println();
+
+
+    public void quictSort(int[] array){
+        if(array == null) return ;
+
+        doSort(array, 0, array.length-1);
     }
 
-    /**
-     *
-     * @param array 将要排序的数组
-     * @param ii 数据的第一个元素的标
-     * @param jj 数组的最后一个元素的下表
-     */
-    public void doSort(int[] array, int ii, int jj){
+    private void doSort(int[] array, int ii, int jj){
         if(array == null) return;
         if(jj - ii < 1) return ;
 
@@ -51,5 +44,66 @@ public class QuickSortTest {
         //递归
         doSort(array, ii, i-1);//基数的前面部分的元素
         doSort(array, i+1, jj);//基数的后面部分的元素
+    }
+
+
+    //*************************************************
+
+    public void quickSort(int []arr){
+        if(arr == null) return;
+        quickSort(arr, 0, arr.length-1);
+    }
+
+    private void quickSort(int []arr, int start, int end){
+        if(start >= end) return ;
+        int mid = potition(arr, start, end);
+        if(mid == -1) return ;
+
+        quickSort(arr, start, mid);
+        quickSort(arr, mid+1, end);
+    }
+
+    private int  potition(int[] arr, int start, int end){
+        if(start >= end) return -1;
+        int i = start;
+        int j = end;
+        int base = arr[i];
+        while(i < j){
+            while(i < j && base <= arr[j])
+                j--;
+            arr[i] = arr[j];
+            while(i < j && base >= arr[i])
+                i++;
+            arr[j] = arr[i];
+        }
+        arr[i] = base;
+        return i;
+    }
+
+    public void doTest2(){
+
+        int len = 75498390;
+
+        int[] arr = new int[len];
+
+        for (int i = 0; i < len; i++) {
+            arr[i] = (int)(Math.random()*len);
+        }
+
+        int [] a = arr;
+
+        long start = System.currentTimeMillis();
+
+        quickSort(a);
+
+        long end = System.currentTimeMillis();
+
+        System.out.println(end-start);
+
+//        for (int i = 0; i < len; i++) {
+//            System.out.print(a[i] +" ");
+//            if(i % 30 == 0)
+//                System.out.println();
+//        }
     }
 }
