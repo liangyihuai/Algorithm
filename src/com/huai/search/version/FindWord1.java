@@ -44,11 +44,11 @@ public class FindWord1 {
 
                         line = reader.readLine();
                     }
-                    if(line != null && ("Chapter "+(chapter+1)).equals(line.trim())){
+                    if(line != null){
                         //new chapter
                         nums.add(count);
                         chapter++;
-                    }else if(line == null){
+                    }else{
                         //text end
                         nums.add(count);
                         break;
@@ -80,7 +80,7 @@ public class FindWord1 {
             int index = kmp.indexOf(content, keyWord);
             while(index != -1){
                 count++;
-                index = kmp.indexOf(content, keyWord, index+1);
+                index = kmp.indexOf(content, keyWord, index+6);
             }
         }
         return count;
@@ -102,7 +102,4 @@ public class FindWord1 {
         System.out.println();
         System.out.println("total num is :"+count);
     }
-
-
-
 }

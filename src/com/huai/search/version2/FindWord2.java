@@ -44,11 +44,11 @@ public class FindWord2 {
 
                         line = reader.readLine();
                     }
-                    if(line != null && ("Chapter "+(chapter+1)).equals(line.trim())){
+                    if(line != null){
                         //new chapter
                         nums.add(count);
                         chapter++;
-                    }else if(line == null){
+                    }else{
                         //text end
                         nums.add(count);
                         break;
@@ -77,7 +77,7 @@ public class FindWord2 {
             int index = content.indexOf(keyWord);
             while(index != -1){
                 count++;
-                index = content.indexOf(keyWord, index+1);
+                index = content.indexOf(keyWord, index+6);
             }
         }
         return count;
