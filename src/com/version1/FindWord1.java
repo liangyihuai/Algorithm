@@ -1,4 +1,4 @@
-package com.huai.search.version2;
+package com.version1;
 
 import java.io.*;
 import java.util.Iterator;
@@ -6,12 +6,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The difference from the version 1 is that this class use the JDK method String.indexOf(String str)
- * and String.indexOf(String str, int begin) to find the keyword.
+ * This class use the KMP algorithm to find the keyword.
  *
  * Created by liangyh on 5/20/16.
  */
-public class FindWord2 {
+public class FindWord1 {
+
     /**
      * the index+1 of list is the chapter,
      * and the value is the keywork number which the chapter contains.
@@ -40,7 +40,7 @@ public class FindWord2 {
                 if(("Chapter "+chapter).equals(line.trim())){
                     int count = 0;
                     while(line != null && !("Chapter "+(chapter+1)).equals(line.trim())){
-                        count += countLine(line);
+                        count += countLineKMP(line);
 
                         line = reader.readLine();
                     }
@@ -66,23 +66,25 @@ public class FindWord2 {
         }
     }
 
+
+    private final KMP kmp = new KMP();
+
     /**
      * count the keyword in one line string.
      * @param content
      * @return the count
      */
-    private int countLine(String content){
+    private int countLineKMP(String content){
         int count = 0;
         if(content != null){
-            int index = content.indexOf(keyWord);
+            int index = kmp.indexOf(content, keyWord);
             while(index != -1){
                 count++;
-                index = content.indexOf(keyWord, index+6);
+                index = kmp.indexOf(content, keyWord, index+6);
             }
         }
         return count;
     }
-
 
     /**
      * print the num of keywork and the total num.
@@ -100,6 +102,4 @@ public class FindWord2 {
         System.out.println();
         System.out.println("total num is :"+count);
     }
-
-
 }

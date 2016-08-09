@@ -5,6 +5,7 @@ package com.huai.sort;
  */
 public class Heap {
 
+    //把start为root的树调整为“跟”比左右孩子大。
     private void heapAdjust(int[] arr, int start, int end){
         int startValue = arr[start];
         //2*start+1表示左孩子

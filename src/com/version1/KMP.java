@@ -1,4 +1,4 @@
-package com.huai.search.version;
+package com.version1;
 
 /**
  *  The <tt>KMP</tt> class finds the first occurrence of a pattern string
@@ -12,7 +12,7 @@ public class KMP {
     private String pat;        // or the pattern string
 
     public KMP(){
-        this.R = 127;
+        this.R = 128;
     }
 
     public KMP(int R){

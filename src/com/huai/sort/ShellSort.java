@@ -45,7 +45,7 @@ public class ShellSort {
      */
 
     int count = 0;
-     void doShellSort(int[] a,  int dk){
+    private void doShellSort(int[] a,  int dk){
         if(dk <= 0) return ;
 
         for (int j = dk; j < a.length; j++) {
