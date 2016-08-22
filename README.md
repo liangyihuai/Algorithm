@@ -3,7 +3,8 @@ About Data structure and Algorithm written by myself while studying.
 
 These codes are may just for memory!!!!! !
 
-2222222222222222222222222222  33333333333333333333333333333
+223
+2222222222222222222222222222
 
 
 
