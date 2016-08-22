@@ -2,7 +2,7 @@
 About Data structure and Algorithm written by myself while studying.
 
 
-These codes are may just for memory!!!!! ! 2
+These codes are may just for memory!!!!! !
 
-These codes are may just for memory!!!!! ! 221
+These codes are may just for memory!!!!! ! 
 
