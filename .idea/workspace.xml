@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a2351284-6fd7-43ff-9c76-5d212c49c935" name="Default" comment="5&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-    </list>
+    <list default="true" id="a2351284-6fd7-43ff-9c76-5d212c49c935" name="Default" comment="5&#10;" />
     <ignored path="Algorithm.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -694,7 +692,7 @@
       <workItem from="1465118407927" duration="103000" />
       <workItem from="1468399771462" duration="26000" />
       <workItem from="1470664654209" duration="8140000" />
-      <workItem from="1471832413698" duration="3137000" />
+      <workItem from="1471832413698" duration="3489000" />
     </task>
     <task id="LOCAL-00001" summary="algorithm&#10;">
       <created>1462946580812</created>
@@ -788,7 +786,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84859000" />
+    <option name="totallyTimeSpent" value="85211000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="7" />
